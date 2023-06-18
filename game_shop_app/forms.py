@@ -10,7 +10,7 @@ class RegisterForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         fields = UserCreationForm.Meta.fields + ("first_name", "last_name", "email", )
 
-    def clean_email(self): ##№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№ Оптимизация??
+    def clean_email(self): 
         email = self.cleaned_data["email"]
         username = self.cleaned_data["username"]
         if User.objects.filter(email=email).exclude(username=username).exists():
