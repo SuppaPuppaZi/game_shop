@@ -1,0 +1,7 @@
+<form method="post">
+    {% csrf_token %}
+    <input type="number" name="quantity" min="1" value="{{ quantity }}">
+    <input type="hidden" name="type" value="{{ type }}">
+    <input type="hidden" name="id" value="{{ id }}">
+    <button type="submit" class="btn btn-dark">Обновить</button>
+</form>

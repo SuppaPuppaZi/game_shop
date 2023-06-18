@@ -1,0 +1,46 @@
+{% extends 'layout/base.html '%}
+
+{% block title %}Cart{% endblock %}
+
+{% block content%}
+<div class="mx-auto my-2 my-sm-3 my-lg-3 p-5" xmlns="http://www.w3.org/1999/html">
+
+    {% include 'cart/remove-all.html'%}
+
+    <table class="table">
+  <thead class="thead-dark">
+    <tr class="table-color">
+      <th scope="col">Товар</th>
+      <th scope="col">Наименование</th>
+      <th scope="col">Количество</th>
+        <th scope="col">Итого</th>
+        <th scope="col"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+  {% for item in cart %}
+    {% for quantity, game in item.items %}
+    <tr class="table-color">
+      <td><a href="{% url 'game_details' game.slug %}"><img class="game-mini-image" src="{{game.image.url}}" alt="Preview"></a></td>
+
+      <td>{{ game.game_name }}</td>
+        <td>{% include 'cart/set-item-quantity.html' with type='game' id=game.id quantity=quantity %}</td>
+        <td>{{ game.price }}</td>
+        <td>{% include 'cart/remove-item.html' with type='game' id=game.id %}</td>
+    </tr>
+    {% endfor %}
+  {% endfor %}
+  </tbody>
+</table>
+
+    <div class="d-flex align-items-center justify-content-center">
+    <div class="card border-secondary my-lg-3 p-3" style="border-width: 2px;">
+        <h3 class="title-center">К покупке: {{ total_price }}</h3>
+        <a href="{% url 'purchase' %}" class="btn btn-outline-dark">Оформить заказ</a>
+    </div>
+</div>
+
+</div>
+
+{% endblock %}

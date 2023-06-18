@@ -1,0 +1,10 @@
+<form method="post">
+    <div class="card border-secondary mx-auto my-lg-4 w-50 p-4">
+        <div class="input-group">
+            {% csrf_token %}
+            <input type="search" class="form-control rounded" placeholder="Найти игру" aria-label="Search"
+                   aria-describedby="search-addon" name="game_name"/>
+            <button type="submit" class="btn btn-outline-danger">Поиск</button>
+        </div>
+    </div>
+</form>

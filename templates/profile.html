@@ -1,0 +1,51 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<div class="d-flex align-items-center justify-content-center">
+    <div class="card border-secondary my-lg-3 p-4" style="border-width: 2px;">
+        <h1>Профиль:</h1>
+        <p>Имя: {{ user.first_name }}</p>
+        <p>Фамилия: {{ user.last_name }} </p>
+        <p>Имя пользователя: {{ user.username }}</p>
+        <p>Почта: {{ user.email }} </p>
+
+        <div class="button-group">
+            <button class="btn btn-danger" onclick="window.location.href = '{% url 'logout' %}?next={% url 'home' %}'">
+                Выйти
+            </button>
+
+            <button class="btn btn-secondary" style="color: white"
+                    onclick="window.location.href = '{% url 'password_change' %}'">
+                Поменять пароль
+            </button>
+
+            <button class="btn btn-dark" onclick="window.location.href = '{% url 'profile_edit' %}'">
+                Редактировать профиль
+            </button>
+        </div>
+
+    </div>
+</div>
+
+<div class="d-flex align-items-center justify-content-center">
+    <div class="card profile-games border-secondary my-lg-3 p-4">
+        <h2>Заказы:</h2>
+
+        <div class="d-flex p-2">
+            {% for order_id, order in orders.items %}
+            <a href="{% url 'game_details' order.game.slug %}">
+                <img class="game-mini-image" src="{{ order.game.image.url }}" alt="Обложка игры">
+            </a>
+            <div class="container">
+                <p>(Место для ключей)</p>
+                <p>Количество: {{ order.quantity }}</p>
+                <p>Дата заказа: {{ order.order_date }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

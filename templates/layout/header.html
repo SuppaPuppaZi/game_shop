@@ -1,0 +1,82 @@
+<header>
+    <nav class="navbar navbar-dark header-color" style="background-color: #DC143C; height: 100%; padding: 5px;">
+
+        <ul class="list-inline d-flex justify-content-center">
+
+            <li class="list-inline-item">
+                <div class="d-flex ">
+                    <a href="{% url 'home'%}">
+                        <img class="header-logo" src="/media/logo3.png" alt="LOGO">
+                    </a>
+                </div>
+            </li>
+
+            <li class="list-inline-item">
+                <button class="header-button" onclick="window.location.href = '{% url 'home' %}'">
+                    Каталог
+                </button>
+            </li>
+            <li class="list-inline-item">
+                <button class="header-button" onclick="window.location.href = '{% url 'about' %}'">
+                    О нас
+                </button>
+            </li>
+        </ul>
+
+        {% if user.is_authenticated %}
+        <div class="d-flex">
+            <button class="btn border-dark btn-warning position-relative" onclick="window.location.href = {% url 'favourites'%}">
+            <span>
+                <img class="header-icon" src="/media/heart-ico.svg" alt="ИЗБРАННОЕ">
+                {% if not request.session.favourites|length %}
+                {% else %}
+                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark" style="z-index: 1">
+                     {{ request.session.favourites|length }} {% endif %}
+                </span>
+            </span>
+            </button>
+
+            <button class="btn border-dark btn-warning position-relative header-auth-btn" onclick="window.location.href = {% url 'cart' %}">
+            <span>
+                <img class="header-icon" src="/media/cart-ico.svg" alt="КОРЗИНА">
+                 {% if not request.session.cart|length %}
+                {% else %}
+                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark" style="z-index: 1">
+                     {{ request.session.cart|length }} {% endif %}
+                </span>
+            </span>
+            </button>
+
+
+            <button class="btn border-dark btn-warning" onclick="window.location.href = {% url 'profile' %}">
+                <img class="header-icon" src="/media/profile-ico.svg" alt="ПРОФИЛЬ">
+            </button>
+
+
+            <button class="btn border-dark btn-warning">
+                <a href="{% url 'logout' %}?next={% url 'home' %}">
+                    <img class="header-icon" src="/media/exit-ico.svg" alt="ВЫЙТИ">
+                </a>
+            </button>
+        </div>
+
+
+        {% else %}
+        <div class="d-flex">
+
+            <button class="btn border-dark btn-warning">
+                <a href="{% url 'login' %}">
+                    <img class="header-icon" src="/media/login-ico.svg" alt="ВОЙТИ">
+                </a>
+            </button>
+
+            <button class="btn border-dark btn-warning" onclick="window.location.href = {% url 'register' %}">
+                <img class="header-icon" src="/media/registration-ico.svg" alt="ЗАРЕГИСТРИРОВАТЬСЯ">
+            </button>
+
+        </div>
+
+        {% endif %}
+
+    </nav>
+</header>

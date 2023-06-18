@@ -1,0 +1,15 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}Purchase{% endblock %}
+
+{% block content %}
+<div class="d-flex align-items-center justify-content-center">
+    <div class="card border-secondary my-lg-3 p-3" style="border-width: 2px; display: inline-block;">
+        <form method="post" action="{% url 'purchase' %}" class="col-md-8 offset-md-2">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" class="btn btn-dark">
+        </form>
+    </div>
+</div>
+{% endblock %}

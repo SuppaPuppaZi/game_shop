@@ -1,0 +1,17 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}Favourites{% endblock %}
+
+{% block content %}
+<div class="my-2 my-sm-3 my-lg-2 position-relative">
+    {% for game in favourites %}
+    <div class="card border-dark d-inline-block text-center">
+        {% include 'card-item.html'%}
+        <div class="d-flex position-absolute">
+            {% include 'favourites/remove-favourite.html' with type='game' id=game.id %}
+            {% include 'cart/add-item.html' with type='game' id=game.id %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

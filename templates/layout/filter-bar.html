@@ -1,0 +1,78 @@
+<nav class="navbar navbar-dark bg-dark navbar-expand-lg d-flex justify-content-center filter-bar-color" >
+    <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown"
+               aria-expanded="true">
+                Жанры
+            </a>
+            <div class="dropdown-menu filter-category" aria-labelledby="navbarDropdown">
+                {% for genre in filter_bar.get_genres %}
+                <a class="dropdown-item" href="{% url 'by_genre' genre.slug %}">{{ genre }}</a>
+                {% endfor %}
+            </div>
+        </li>
+
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+               aria-expanded="false">
+                Платформы
+            </a>
+            <div class="dropdown-menu filter-category" aria-labelledby="navbarDropdown">
+                {% for platform in filter_bar.get_platforms %}
+                <a class="dropdown-item" href="{% url 'by_platform' platform.slug %}">{{ platform }}</a>
+                {% endfor %}
+            </div>
+        </li>
+
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+               aria-expanded="false">
+                Языки
+            </a>
+            <div class="dropdown-menu filter-category" aria-labelledby="navbarDropdown">
+                {% for language in filter_bar.get_languages %}
+                <a class="dropdown-item" href="{% url 'by_language' language.slug %}">{{ language }}</a>
+                {% endfor %}
+            </div>
+        </li>
+
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+               aria-expanded="false">
+                Разработчики
+            </a>
+            <div class="dropdown-menu filter-category" aria-labelledby="navbarDropdown">
+                {% for developer in filter_bar.get_developers %}
+                <a class="dropdown-item" href="{% url 'by_developer' developer.slug %}">{{ developer }}</a>
+                {% endfor %}
+            </div>
+        </li>
+
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+               aria-expanded="false">
+                Издатели
+            </a>
+            <div class="dropdown-menu filter-category" aria-labelledby="navbarDropdown">
+                {% for publisher in filter_bar.get_publishers %}
+                <a class="dropdown-item" href="{% url 'by_publisher' publisher.slug %}">{{ publisher }}</a>
+                {% endfor %}
+            </div>
+        </li>
+
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+               aria-expanded="false">
+                Цена
+            </a>
+            <div class="dropdown-menu filter-category" aria-labelledby="navbarDropdown">
+                <form method="post" action="{% url 'by_price' %}" class="mx-auto p-3">
+                    {% csrf_token %}
+                    <input class="form-control" type="number" name="min_price" min="0" placeholder="От"/>
+                    <input  class="form-control" type="number" name="max_price" min="0" placeholder="До"/>
+                    <button type="submit" class="btn btn-outline-dark mt-2">Поиск</button>
+                </form>
+            </div>
+        </li>
+    </ul>
+</nav>

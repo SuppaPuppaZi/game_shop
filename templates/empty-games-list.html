@@ -1,0 +1,14 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}Not Found{% endblock %}
+
+{% block content %}
+    <div class="d-flex align-items-center justify-content-center">
+        <div class="card border-secondary my-lg-3 p-3" style="border-width: 2px;">
+            {% include 'layout/search-field.html' %}
+            <h3 class="title-center text-center">Ничего не найдено</h3>
+          <p class="text-center">{{ text }}</p>
+            {% include 'layout/catalog-btn.html' %}
+        </div>
+    </div>
+{% endblock %}

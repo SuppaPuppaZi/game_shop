@@ -1,0 +1,5 @@
+<form method="post" action="{% url 'add_item' id=id %}">
+    {% csrf_token %}
+    <input type="hidden" name="type" value="{{ type }}">
+    <button type="submit" class="btn btn-dark">Добавить в корзину</button>
+</form>

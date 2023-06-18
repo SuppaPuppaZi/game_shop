@@ -1,0 +1,30 @@
+{% extends 'layout/base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="d-flex align-items-center justify-content-center">
+    <div class="card border-secondary my-lg-5 p-3" style="border-width: 2px;">
+    <form class="col-md-8 offset-md-2" method="post">
+        {% csrf_token %}
+      <div class="mb-3">
+        <label for="username" class="form-label">Имя пользователя: </label>
+        <input type="text" class="form-control" id="username" name="username">
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Пароль: </label>
+        <input type="password" class="form-control" id="password" name="password">
+      </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-outline-danger">Войти</button>
+        </div>
+
+
+         {% if form.errors %}
+                    <p>Имя пользователя или пароль не совпали. Убедитесь что вы корректно ввели все данные.</p>
+         {% endif %}
+    </form>
+        <a class="text-center" href="{% url 'password_reset' %}"> Забыли пароль?</a>
+    </div>
+</div>
+{% endblock %}

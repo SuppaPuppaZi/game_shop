@@ -1,0 +1,5 @@
+<form method="post" action="{% url 'remove_all' %}">
+    {% csrf_token %}
+    <input type="hidden" name="type" value="{{ type }}">
+    <button type="submit" class="btn btn-danger" value>Очистить корзину</button>
+</form>

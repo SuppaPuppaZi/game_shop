@@ -1,0 +1,28 @@
+<div class="card border-secondary" style="display: inline-block;">
+
+    <div class="game-image-container">
+        <img class="game-image" src="{{game.image.url}}" alt="Preview">
+    </div>
+
+    <div class="card-img-overlay lh">
+        <h3 class="card-title">{{game.game_name}}</h3>
+        <span class="card-text"><b>Жанры:</b></span>
+        {% for g in game.genres.all %}
+        <span class="card-text">{{g.genre_name}}, </span>
+        {% endfor %}
+        <span class="card-text" style="display:inline-block;"><b>Год выпуска</b>: {{game.release_date}}</span>
+        <span class="card-text" style="display:inline-block;"><b>Разработчик:</b> {{game.developer}}</span>
+        <span class="card-text" style="display:inline-block;"><b>Издатель:</b> {{game.publisher}}</span>
+        <span class="card-text" style="display:inline-block;"><b>Платформы:</b> </span>
+        {% for p in game.platforms.all %}
+            <span class="card-text"> {{p.platform_name}}, </span>
+        {% endfor %}
+
+        <br><span class="card-text" style="display:inline-block; margin-bottom: 20px;"><b>Цена:</b> {{game.price}} Рублей</span>
+
+        <button class="btn btn-outline-dark" onclick="window.location.href = '{% url 'game_details' game.slug %}'">
+            Подробнее...
+        </button>
+    </div>
+
+</div>

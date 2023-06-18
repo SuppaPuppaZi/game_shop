@@ -1,0 +1,52 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+<div class="card border-secondary my-2 my-sm-3 my-lg-3 p-3" style="border-width: 2px;">
+    <div class="d-flex">
+        <img class="game-image mx-auto my-2 my-sm-3 my-lg-5 p-3" src="{{game.image.url}}" alt="Preview">
+
+        <div class="container px-4">
+            <h3 class="card-title">{{game.game_name}}</h3>
+            <p class="card-text"><b>Описание</b>: {{ game.description }}</p>
+
+            <div class="card border-dark p-4 text-center" style="display: inline-block;">
+                {% for screenshot in game.gamescreenshots_set.all%}
+                <img class="game-screenshot " src="{{ screenshot.image.url }}" alt="{{ screenshot.description }}">
+                {% endfor %}
+            </div>
+
+            <div style="margin: 7px 0px;">
+                <br><span class="card-text"><b>Жанры:</b></span>
+                {% for g in game.genres.all %}
+                <span class="card-text">{{g.genre_name}}, </span>
+                {% endfor %}
+            </div>
+            <p class="card-text"><b>Дата выпуска</b>: {{game.release_date}}</p>
+            <p class="card-text"><b>Разработчик</b>: {{game.developer}}</p>
+            <p class="card-text"><b>Издатель</b>: {{game.publisher}}</p>
+            <span class="card-text"><b>Платформы:</b></span>
+            {% for p in game.platforms.all %}
+            <span class="card-text">{{p.platform_name}},</span>
+            {% endfor %}
+
+            <br><br><span class="card-text" style="display:inline-block;"><b>Языки:</b> </span>
+            {% for l in game.languages.all %}
+            <span class="card-text"> {{l.language_name}}, </span>
+            {% endfor %}
+
+            <br><br>
+            <p class="card-text"><b>Цена</b>: {{game.price}} Рублей</p>
+            <p class="card-text"><b>Минимальные системные требования</b>:<br>{{game.minimum_requirements}}</p>
+            <p class="card-text"><b>Рекомендуемые системные требования</b>:<br>{{game.recommended_requirements}}</p>
+            {% if user.is_authenticated %}
+            <div class="d-inline-flex">
+                {% include 'favourites/add-favourite.html' with type='game' id=game.id %}
+            </div>
+            <div class="d-inline-flex">
+                {% include 'cart/add-item.html' with type='game' id=game.id %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
